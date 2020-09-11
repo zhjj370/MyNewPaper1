@@ -239,8 +239,6 @@ public class Machine {
             if(mybuffer[i].getState() == Const.nothingInBuffer){
                 mybuffer[i].setPartID(ID);
                 mybuffer[i].setState(Const.waitingToRecive);
-                //Todo:测试用，找出负载没有正确计算原因
-                //System.out.println("机器号："+ getID() + "，分配工位号：" + i);
                 break;
             }
         }
