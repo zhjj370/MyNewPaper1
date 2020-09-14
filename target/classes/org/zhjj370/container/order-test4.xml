@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE source [
+        <!ELEMENT source (order+) >
+        <!ELEMENT order (orderTime,deliveryData,directory) >
+        <!ELEMENT orderTime (#PCDATA) >
+        <!ELEMENT deliveryData (#PCDATA) >
+        <!ELEMENT directory (content+) >
+        <!ELEMENT content (partTypeID,partType,processing,time,amount) >
+        <!ELEMENT partTypeID (#PCDATA) >
+        <!ELEMENT partType (#PCDATA) >
+        <!ELEMENT processing (#PCDATA) >
+        <!ELEMENT time (#PCDATA) >
+        <!ELEMENT amount (#PCDATA) >
+
+        <!ATTLIST order id CDATA #REQUIRED>
+        <!ATTLIST content id CDATA #REQUIRED>
+        ]>
+
+<source>
+    <order id="1">
+        <orderTime>0</orderTime>
+        <deliveryData>3000</deliveryData>
+        <directory>
+            <content id="1">
+                <partTypeID>1</partTypeID>
+                <partType>plate</partType>
+                <processing>milling-carving</processing>
+                <time>300-150</time>
+                <amount>2</amount>
+            </content>
+        </directory>
+    </order>
+    <order id="2">
+        <orderTime>0</orderTime>
+        <deliveryData>3000</deliveryData>
+        <directory>
+            <content id="1">
+                <partTypeID>1</partTypeID>
+                <partType>plate</partType>
+                <processing>milling-carving</processing>
+                <time>300-150</time>
+                <amount>2</amount>
+            </content>
+            <content id="2">
+                <partTypeID>2</partTypeID>
+                <partType>axis</partType>
+                <processing>turning-milling</processing>
+                <time>400-150</time>
+                <amount>1</amount>
+            </content>
+            <content id="3">
+                <partTypeID>3</partTypeID>
+                <partType>flange</partType>
+                <processing>milling-turning-carving</processing>
+                <time>200-200-250</time>
+                <amount>2</amount>
+            </content>
+            <content id="4">
+                <partTypeID>1</partTypeID>
+                <partType>plate</partType>
+                <processing>milling-carving</processing>
+                <time>350-200</time>
+                <amount>1</amount>
+            </content>
+        </directory>
+    </order>
+    <order id="3">
+        <orderTime>1000</orderTime>
+        <deliveryData>2000</deliveryData>
+        <directory>
+            <content id="1">
+                <partTypeID>1</partTypeID>
+                <partType>plate</partType>
+                <processing>milling-carving</processing>
+                <time>340-180</time>
+                <amount>2</amount>
+            </content>
+            <content id="2">
+                <partTypeID>2</partTypeID>
+                <partType>axis</partType>
+                <processing>turning-milling</processing>
+                <time>420-170</time>
+                <amount>1</amount>
+            </content>
+        </directory>
+    </order>
+    <order id="4">
+        <orderTime>1000</orderTime>
+        <deliveryData>2000</deliveryData>
+        <directory>
+            <content id="1">
+                <partTypeID>1</partTypeID>
+                <partType>plate</partType>
+                <processing>milling-carving</processing>
+                <time>340-180</time>
+                <amount>2</amount>
+            </content>
+            <content id="2">
+                <partTypeID>2</partTypeID>
+                <partType>axis</partType>
+                <processing>turning-milling</processing>
+                <time>420-170</time>
+                <amount>1</amount>
+            </content>
+        </directory>
+    </order>
+    <order id="5">
+        <orderTime>1000</orderTime>
+        <deliveryData>2000</deliveryData>
+        <directory>
+            <content id="1">
+                <partTypeID>1</partTypeID>
+                <partType>plate</partType>
+                <processing>milling-carving</processing>
+                <time>340-180</time>
+                <amount>2</amount>
+            </content>
+            <content id="2">
+                <partTypeID>1</partTypeID>
+                <partType>axis</partType>
+                <processing>turning-milling</processing>
+                <time>420-170</time>
+                <amount>1</amount>
+            </content>
+        </directory>
+    </order>
+    <order id="6">
+        <orderTime>1000</orderTime>
+        <deliveryData>2000</deliveryData>
+        <directory>
+            <content id="1">
+                <partTypeID>1</partTypeID>
+                <partType>plate</partType>
+                <processing>milling-carving</processing>
+                <time>340-180</time>
+                <amount>2</amount>
+            </content>
+            <content id="2">
+                <partTypeID>3</partTypeID>
+                <partType>axis</partType>
+                <processing>turning-milling</processing>
+                <time>420-170</time>
+                <amount>1</amount>
+            </content>
+        </directory>
+    </order>
+</source>

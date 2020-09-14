@@ -27,7 +27,7 @@ AMRM层对于全局性能的优化更多的是一种保证，在系统进行实�
 
 ![](ApproachingIndexForDt.svg)
 
-![Difference from ideal value](C:\Users\a1585\Documents\myworkspace\java\real-time-decision-1.0.0\output\Difference from ideal value.svg)
+![Difference from ideal value](Difference from ideal value.svg)
 
 ## 超期工件统计/Overdue artifact statistics
 ![](Bar chart for overdue artifacts.svg)

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!--用以下格式来定义车间中的设备
+        Use the following format to define the equipment in the workshop-->
+
+<!DOCTYPE source [
+        <!ELEMENT source (machineType+) >
+        <!ELEMENT machineType (machineName,bufferAmount,amount,ability+,energyConsumption,life) >
+        <!ELEMENT machineName (#PCDATA) >
+        <!ELEMENT bufferAmount (#PCDATA) >
+        <!ELEMENT amount (#PCDATA) >
+        <!ELEMENT ability (#PCDATA) >
+        <!ELEMENT energyConsumption (#PCDATA) >
+        <!ELEMENT life (#PCDATA) >
+
+        <!ATTLIST machineType id CDATA #REQUIRED>
+        <!ATTLIST ability aid CDATA #REQUIRED>
+        ]>
+<source>
+    <machineType id="1">
+        <machineName>lathe</machineName>
+        <bufferAmount>4</bufferAmount>
+        <amount>2</amount>
+        <ability aid="1">turning</ability>
+        <energyConsumption>1.4</energyConsumption>
+        <life>3</life>
+    </machineType>
+
+    <machineType id="2">
+        <machineName>milling-M</machineName>
+        <bufferAmount>4</bufferAmount>
+        <amount>2</amount>
+        <ability aid="1">milling</ability>
+        <energyConsumption>1.5</energyConsumption>
+        <life>3</life>
+    </machineType>
+
+    <machineType id="3">
+        <machineName>Center-M</machineName>
+        <bufferAmount>4</bufferAmount>
+        <amount>1</amount>
+        <ability aid="1">milling</ability>
+        <ability aid="2">carving</ability>
+        <ability aid="3">turning</ability>
+        <ability aid="4">special1</ability>
+        <energyConsumption>4.5</energyConsumption>
+        <life>3</life>
+    </machineType>
+
+    <machineType id="4">
+        <machineName>Center-M</machineName>
+        <bufferAmount>4</bufferAmount>
+        <amount>1</amount>
+        <ability aid="1">milling</ability>
+        <ability aid="2">carving</ability>
+        <ability aid="3">turning</ability>
+        <ability aid="4">special1</ability>
+        <ability aid="5">special2</ability>
+        <energyConsumption>4.5</energyConsumption>
+        <life>3</life>
+    </machineType>
+
+    <machineType id="5">
+        <machineName>carving-M</machineName>
+        <bufferAmount>4</bufferAmount>
+        <amount>2</amount>
+        <ability aid="1">carving</ability>
+        <energyConsumption>1.5</energyConsumption>
+        <life>3</life>
+    </machineType>
+
+
+</source>
