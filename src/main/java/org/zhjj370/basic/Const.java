@@ -1,35 +1,28 @@
 package org.zhjj370.basic;
 
 /**
- * 一个配置文件
+ * 一个配置文件 A configuration file
  * @author zhjj370
  */
 public class Const {
     /**
      * 各种配置文件的位置url
      */
-    //加工设备配置文件位置
+    //加工设备配置文件位置 Location of a processing equipment configuration file
     public static final String machineTypeUrl = "machine-type.xml";
-    //订单配置文件位置
+    //订单配置文件的位置 Location of a order configuration file
     public static final String orderUrl = "order-test1.xml";
-    //画甘特图数据存放位置
+    //画甘特图数据存放位置 Location of Gantt chart data storage
     public static final String dataForGanttUrl = "output/gantt.txt";
 
-
     /**
-     * 表格的名字
-     */
-
-
-
-    /**
-     * 实时决策的时间窗口间隔
+     * 实时决策的时间窗口间隔 Time window interval for real-time decision-making
      */
     public static final int timeWindow = 1;
 
-
     /**
-     * 配送时间+工件加工辅助准备时间，这里认为是固定值，同时假设运力无限
+     * 工件配送时间，这里认为是固定值，同时假设运力无限
+     *  The delivery time of the workpiece is considered to be a fixed value here, and it is assumed that the capacity is unlimited
      */
     public static final int transportTime = 20;
 
@@ -58,26 +51,10 @@ public class Const {
     public static final int waitingForFrocessingToComplete = 3;
     //加工完，等待下一步分配
     public static final int waitingForNextStep = 4;
-    /**
-     * 更改BUFFER区状态
-     */
-    //无工件->待接收
-
-    //待接收->待加工
-
-    //待加工->正在加工
-
-    //正在加工->加工完，等待下一步分配
-
-    //加工完，等待下一步分配
 
 
-
-    /**
-     * 暂用变量值
-     */
     //车间任务限制数量
-    public static final int maxPartAmount = 30;
+    public static final int maxPartAmount = 100;
 
     /**
      * 几率

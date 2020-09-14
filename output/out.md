@@ -4,13 +4,9 @@
 
 
 
-需要注意的是，以分布式智能为基础的完全实时调度可能不会在某一项保持最优，例如得到最小的加工时间，最小的耗能等等。
+It should be noted that the complete real-time scheduling based on distributed intelligence may not be optimal in a certain item, such as the smallest processing time, the smallest energy consumption, and so on.
 
-AMRM层对于全局性能的优化更多的是一种保证，在系统进行实时调度的同时，优化自组织规则，使系统运行符合设计人员预期。
-
-本文统计
-
-
+The AMRM layer is more of a guarantee for the optimization of global performance. While the system is performing real-time scheduling, it optimizes the self-organizing rules to make the system run in line with the designer's expectations.
 
 ---------
 
