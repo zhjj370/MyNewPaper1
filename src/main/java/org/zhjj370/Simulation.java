@@ -185,15 +185,16 @@ public class Simulation {
                 //计算交货期临近指数
                 double approachingIndexForDt = partManager.getApproachingIndexForDt(countT);
                 ApproachingIndexForDtList.add(approachingIndexForDt); //记录交货期临近指数
+                //调整“parts select machines”
                 if(approachingIndexForDt<0.65){
                     double ax = 0.6 - approachingIndexForDt;
                     double ex = ax - axx; //与上一次误差的差值，微分项
                     exx += ax; //误差的累计值，积分项
                     axx = ax; //记录这一次的误差值
                     //AMRM层系数调节 - Analysis domain
-                    double coefficient_energy = 1 - 0.7 * ax - 0.0015 * exx - 0.01 * ex; //可用的搭配
+                    //double coefficient_energy = 1 - 0.7 * ax - 0.0015 * exx - 0.01 * ex; //可用的搭配
                     //double coefficient_energy = 1 - 0.8 * ax - 0.002 * exx; //可用的搭配
-                    //double coefficient_energy = 1 - 0.8 * ax - 0.002 * exx- 0.02 * ex;//可用的搭配
+                    double coefficient_energy = 1 - 0.8 * ax - 0.002 * exx- 0.02 * ex;//可用的搭配
                     if (coefficient_energy < 0) coefficient_energy = 0;
                     if (coefficient_energy > 1) coefficient_energy = 0.8;
                     ApproachingIndexForDtListXX.add(coefficient_energy);
@@ -247,13 +248,14 @@ public class Simulation {
 
 
         /**
-         * 以下为数据绘图
+         * 以下为数据绘图 The following is data plotting.
          */
         DataPlotting myDataPlot = new DataPlotting();
         //绘制实时耗能图
         myDataPlot.plotUnitEnergy(unitEnergyList,countT);
         //绘制交货期临近指数
         myDataPlot.plotApproachingIndexForDt(ApproachingIndexForDtList,countT);
+        //
         myDataPlot.plotApproachingIndexForDtXX(ApproachingIndexForDtListXX,countT);
         //绘制交货期超期统计图
         myDataPlot.plotOverdueArtifacts(dataForOverdueList);

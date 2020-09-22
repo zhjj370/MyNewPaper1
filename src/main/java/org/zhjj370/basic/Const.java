@@ -1,7 +1,8 @@
 package org.zhjj370.basic;
 
 /**
- * 一个配置文件 A configuration file
+ * 一个配置文件
+ * A configuration file
  * @author zhjj370
  */
 public class Const {
@@ -22,34 +23,36 @@ public class Const {
 
     /**
      * 工件配送时间，这里认为是固定值，同时假设运力无限
-     *  The delivery time of the workpiece is considered to be a fixed value here, and it is assumed that the capacity is unlimited
+     *  The transportation time of the part is considered to be a fixed value here,
+     *  and it is assumed that the capacity is unlimited
      */
     public static final int transportTime = 20;
 
     /**
      * 仓库的配置
+     *  Warehouse configuration
      */
-    //仓库的出口数量
+    //仓库的出口数量 Export quantity of warehouse
     public static final int numberOfWarehouseExports = 2;
-    //每个仓库出口准备下个货物的等待时间
+    //每个仓库出口准备下个货物的等待时间 The waiting time of each warehouse to prepare the next goods
     public static final int prepareTimeForExports = 9;
-    //仓库的入口数量
+    //仓库的入口数量 Number of entrances to the warehouse
     public static final int numberOfWarehouseEntrance = 3;
-    //每个仓库入口准备下个货物的等待时间
-    public static final int prepareTimeForEntranc = 10;
+    //每个仓库入口准备下个货物的等待时间 The waiting time for each warehouse entrance to prepare the next goods
+    public static final int prepareTimeForEntranc = 5;
 
     /**
-     * 机器中buffer区状态值
+     * 机器中buffer区状态值 State value of the buffer area in the machine
      */
-    //无工件
+    //无工件 No parts
     public static final int nothingInBuffer = 0;
-    //待加工
+    //待加工 To be processed
     public static final int WaitingForProcessing = 1;
-    //待接收
+    //待接收 To be received
     public static final int waitingToRecive = 2;
-    //正在加工
+    //正在加工 Processing
     public static final int waitingForFrocessingToComplete = 3;
-    //加工完，等待下一步分配
+    //加工完，等待下一步分配 After processing, wait for the next allocation
     public static final int waitingForNextStep = 4;
 
 
@@ -57,16 +60,21 @@ public class Const {
     public static final int maxPartAmount = 100;
 
     /**
-     * 几率
+     * 几率定义
      */
-    //是否采用随机数
+    //是否采用随机数 Whether to use random numbers
     public static final boolean whetherToUseRandom = false;
     //随机数random的种子
     public static final int seed = 0;
-    //工艺对应时间改变几率
+    //工艺对应时间改变几率 Probability of process time change
     public static final int _ptime = 80;
-    //增长幅度
+    //增长幅度 Growth rate
     public static final int _growth = 10;
+
+    /**
+     * 一些程序中的选择
+     */
+
 
     /**
      *

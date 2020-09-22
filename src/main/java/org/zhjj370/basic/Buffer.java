@@ -1,13 +1,13 @@
 package org.zhjj370.basic;
 
 /**
- * 内部类，构造一个Buffer
- *
+ * A buffer station
+ * @author Zequn ZHANG
  */
 public class Buffer{
-    //用于记录工件号
+    //Used to record the part number，-1 means no part in this station
     private int partID = -1;
-    //用于记录当前状态
+    //用于记录当前状态 Used to record the current state
     private int state = Const.nothingInBuffer;
 
     public void setPartID(int partID){

@@ -8,8 +8,13 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
 
+
+/**
+ *
+ * @author Zequn ZHANG
+ */
 public class Machine {
-    //私有域
+    //私有域 Private domain
     private String machineTypeID = null;
     private String machineName = null;
     private int bufferAmount = 0;

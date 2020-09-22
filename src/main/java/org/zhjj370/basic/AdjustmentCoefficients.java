@@ -3,6 +3,8 @@ package org.zhjj370.basic;
 
 /**
  * 存放调整系数
+ *  Storage adjustment factor
+ * @author Zequn ZHANG
  */
 
 public class AdjustmentCoefficients {
