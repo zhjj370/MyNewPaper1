@@ -1,4 +1,8 @@
-# 生产过程/production process
+
+
+
+
+## 生产过程/production process
 
 ![Gantt](Gantt.svg)
 
@@ -10,27 +14,26 @@ The AMRM layer is more of a guarantee for the optimization of global performance
 
 ---------
 
-# 数据统计/Statistics
 
-## 单位能量消耗/Energy consumption per unit time
+
+## 数据统计/Statistics
+
+### 单位能量消耗/Energy consumption per unit time
 
 ![Energy](Energy.svg)
 
+### 交货期临近指数/Delivery date approaching index
 
-# 过程参考数据
-
-## 交货期临近指数/Delivery date approaching index
-
-![](ApproachingIndexForDt.svg)
+![](NDI.svg)
 
 ![Difference from ideal value](Difference from ideal value.svg)
 
-## 超期工件统计/Overdue artifact statistics
+### 超期工件统计/Overdue artifact statistics
 ![](Bar chart for overdue artifacts.svg)
 
 
 
-## 单台机器负载变化情况/Load changes of a single machine
+### 单台机器负载变化情况/Load changes of a single machine
 ![](SingleMachineLoadChange.svg)
 
 ![SingleMachineBusynessChange](SingleMachineBusynessChange.svg)

@@ -22,7 +22,6 @@ import java.util.*;
 
 /**
  * 实时决策仿真的主程序
- *
  */
 public class Simulation {
     public static void main(String[] args) throws IOException {
@@ -176,7 +175,6 @@ public class Simulation {
                 }
             }
 
-
             //查询是否全部做完 false 跳出循环
             isAllFinished = partManager.isAllFinished();
             if(isAllFinished) {
@@ -185,32 +183,51 @@ public class Simulation {
                 //计算交货期临近指数
                 double approachingIndexForDt = partManager.getApproachingIndexForDt(countT);
                 ApproachingIndexForDtList.add(approachingIndexForDt); //记录交货期临近指数
-                //调整“parts select machines”
-                if(approachingIndexForDt<0.65){
-                    double ax = 0.6 - approachingIndexForDt;
-                    double ex = ax - axx; //与上一次误差的差值，微分项
-                    exx += ax; //误差的累计值，积分项
-                    axx = ax; //记录这一次的误差值
-                    //AMRM层系数调节 - Analysis domain
-                    //double coefficient_energy = 1 - 0.7 * ax - 0.0015 * exx - 0.01 * ex; //可用的搭配
-                    //double coefficient_energy = 1 - 0.8 * ax - 0.002 * exx; //可用的搭配
-                    double coefficient_energy = 1 - 0.8 * ax - 0.002 * exx- 0.02 * ex;//可用的搭配
-                    if (coefficient_energy < 0) coefficient_energy = 0;
-                    if (coefficient_energy > 1) coefficient_energy = 0.8;
-                    ApproachingIndexForDtListXX.add(coefficient_energy);
-                    adjustmentCoefficients.setCoefficient_energy(coefficient_energy);
-                    adjustmentCoefficients.setCoefficient_load((1 - coefficient_energy) * 0.5);
-                    adjustmentCoefficients.setCoefficient_busyness((1 - coefficient_energy)*0.5);
-                }
-                else {
-                    exx = 0; //消除误差的累计值，积分项
-                    axx = 0;
-                    adjustmentCoefficients.setCoefficient_energy(0.8);
-                    ApproachingIndexForDtListXX.add(0.8);
-                    adjustmentCoefficients.setCoefficient_load(0.1);
-                    adjustmentCoefficients.setCoefficient_busyness(0.1);
-                }
+                if(Const.whetherToUseAMRM) {
+                    //调整“parts select machines”
+                    if (approachingIndexForDt < 0.65) {
+                        double ax = 0.6 - approachingIndexForDt;
+                        double ex = ax - axx; //与上一次误差的差值，微分项
+                        exx += ax; //误差的累计值，积分项
+                        axx = ax; //记录这一次的误差值
+                        //AMRM层系数调节 - Analysis domain
+                        //double coefficient_energy = 1 - 0.7 * ax - 0.0015 * exx - 0.01 * ex; //可用的搭配
+                        //double coefficient_energy = 1 - 0.8 * ax - 0.002 * exx; //可用的搭配
+                        double coefficient_energy = 1 - 0.8 * ax - 0.002 * exx - 0.02 * ex;//可用的搭配
+                        if (coefficient_energy < 0) coefficient_energy = 0;
+                        if (coefficient_energy > 1) coefficient_energy = 0.8;
+                        ApproachingIndexForDtListXX.add(coefficient_energy);
+                        adjustmentCoefficients.setCoefficient_energy(coefficient_energy);
+                        adjustmentCoefficients.setCoefficient_load((1 - coefficient_energy) * 0.5);
+                        adjustmentCoefficients.setCoefficient_busyness((1 - coefficient_energy) * 0.5);
+                    } else {
+                        exx = 0; //消除误差的累计值，积分项
+                        axx = 0;
+                        adjustmentCoefficients.setCoefficient_energy(0.8);
+                        ApproachingIndexForDtListXX.add(0.8);
+                        adjustmentCoefficients.setCoefficient_load(0.1);
+                        adjustmentCoefficients.setCoefficient_busyness(0.1);
+                    }
 
+                    //调整machines select parts
+                    if (approachingIndexForDt <= 1 && approachingIndexForDt > 0.8) {
+                        adjustmentCoefficients.setCoefficient_dt(0.1);
+                        adjustmentCoefficients.setCoefficient_ot(0.4);
+                        adjustmentCoefficients.setCoefficient_at(0.5);
+                    } else if (approachingIndexForDt <= 0.8 && approachingIndexForDt > 0.6) {
+                        adjustmentCoefficients.setCoefficient_dt(0.3);
+                        adjustmentCoefficients.setCoefficient_ot(0.3);
+                        adjustmentCoefficients.setCoefficient_at(0.4);
+                    } else if (approachingIndexForDt <= 0.6 && approachingIndexForDt > 0.4) {
+                        adjustmentCoefficients.setCoefficient_dt(0.5);
+                        adjustmentCoefficients.setCoefficient_ot(0.2);
+                        adjustmentCoefficients.setCoefficient_at(0.3);
+                    } else {
+                        adjustmentCoefficients.setCoefficient_dt(0.8);
+                        adjustmentCoefficients.setCoefficient_ot(0.1);
+                        adjustmentCoefficients.setCoefficient_at(0.1);
+                    }
+                }
                 //计算瓶颈资源指数-----当前机器繁忙度
                 shopFloor.refreshBusyness();
             }
@@ -266,6 +283,8 @@ public class Simulation {
         myDataPlot.plotSingleMachineBusynessChange(shopFloor.getDataForBusynessList(),countT);
         //绘制最大负载曲线
         myDataPlot.plotMaxMachineLoadChange(shopFloor.getDataForMaxBusynessList(),countT);
+
+
         //绘制甘特图
         new GanttPlotSvg(DataProcess.dataprocess(),countT);
 

@@ -19,9 +19,9 @@ public class AdjustmentCoefficients {
 
     //-----“工件选机器”中各项调整系数------- //
     //Various adjustment coefficients in "parts select machines"//
-    private double coefficient_load = 0.2;
-    private double coefficient_busyness = 0.2;
-    private double coefficient_energy = 0.6;
+    private double coefficient_load = 0.3;
+    private double coefficient_busyness = 0.3;
+    private double coefficient_energy = 0.4;
 
 
 

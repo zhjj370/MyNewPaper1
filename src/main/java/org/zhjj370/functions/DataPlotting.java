@@ -1,5 +1,8 @@
 package org.zhjj370.functions;
 
+import com.orsonpdf.PDFDocument;
+import com.orsonpdf.PDFGraphics2D;
+import com.orsonpdf.Page;
 import org.zhjj370.container.element.DataForBusyness;
 import org.zhjj370.container.element.DataForOverdue;
 import org.zhjj370.functions.element.DataForaBar;
@@ -49,7 +52,7 @@ public class DataPlotting {
      */
     private JFreeChart createLineChart(XYDataset dataset,int time, String title, String xName,String yName) {
         JFreeChart chart = ChartFactory.createXYLineChart(title, xName, yName, dataset);
-        chart.setTitle(new TextTitle(title,new Font("Dialog",Font.BOLD,18)));
+        chart.setTitle(new TextTitle(title,new Font("Dialog",Font.BOLD,13)));
 
         XYPlot plot = (XYPlot) chart.getPlot();
         plot.setDomainPannable(true);
@@ -59,16 +62,16 @@ public class DataPlotting {
         xAxis.setLowerMargin(0.2);
         xAxis.setUpperMargin(0.2);
         xAxis.setRange(0,time+100) ;
-        xAxis.setLabelFont(new Font("Dialog", Font.BOLD, 15));
-        xAxis.setTickLabelFont(new Font("Dialog", Font.PLAIN, 12));
+        xAxis.setLabelFont(new Font("Dialog", Font.BOLD, 10));
+        xAxis.setTickLabelFont(new Font("Dialog", Font.PLAIN, 8));
         plot.setDomainAxis(xAxis);
         //xAxis.setStandardTickUnits(createStandardDateTickUnits());
 
         NumberAxis yAxis = (NumberAxis) plot.getRangeAxis();
         yAxis.setLowerMargin(0.2);
         yAxis.setUpperMargin(0.2);
-        yAxis.setLabelFont(new Font("Dialog", Font.BOLD, 15));
-        yAxis.setTickLabelFont(new Font("Dialog", Font.PLAIN, 12));
+        yAxis.setLabelFont(new Font("Dialog", Font.BOLD, 10));
+        yAxis.setTickLabelFont(new Font("Dialog", Font.PLAIN, 8));
         plot.setRangeAxis(yAxis);
 
         return chart;
@@ -85,8 +88,6 @@ public class DataPlotting {
         JFreeChart chart = ChartFactory.createBarChart(
                 title, xName /* x-axis label*/,
                 yName /* y-axis label */, dataset);
-       /* chart.addSubtitle(new TextTitle("Time to generate 1000 charts in SVG "
-                + "format (lower bars = better performance)"));*/
         chart.setBackgroundPaint(Color.WHITE);
         CategoryPlot plot = (CategoryPlot) chart.getPlot();
 
@@ -109,56 +110,6 @@ public class DataPlotting {
         chart.getLegend().setFrame(BlockBorder.NONE);
         return chart;
     }
-
-    /*private  JFreeChart createCominbineChart(List<DataForGantt> data,List<Double> unitApproachingIndexForDt,int time) {
-        //CategoryDataset var0 = createDataset1();
-        CategoryPlot plot1 = new CategoryPlot(createDatasetLong(data), (CategoryAxis)null, var1, var2);
-        IntervalCategoryDataset dataset = createDatasetLong(data);
-        NumberAxis var1 = new NumberAxis("Value");
-        var1.setStandardTickUnits(NumberAxis.createIntegerTickUnits());
-        //LineAndShapeRenderer var2 = new LineAndShapeRenderer();
-        CategoryPlot plot1 = (CategoryPlot)chart.getPlot();
-        GanttRenderer1 renderer = (GanttRenderer1)plot.getRenderer();
-        renderer.setDrawBarOutline(false);
-        //plot.setLabelFont(new Font("Dialog", Font.PLAIN, 18));
-        renderer.setDefaultItemLabelGenerator(new GanttPlot.LabelGenerator(
-                (Integer) null));
-        renderer.setDefaultItemLabelFont(new Font("Dialog", Font.PLAIN, 20));
-        renderer.setDefaultItemLabelsVisible(true);
-        renderer.setDefaultItemLabelPaint(Color.BLACK);
-        renderer.setDefaultPositiveItemLabelPosition(new ItemLabelPosition(
-                ItemLabelAnchor.INSIDE6, TextAnchor.BOTTOM_CENTER));
-
-        //var2.setBaseToolTipGenerator(new StandardCategoryToolTipGenerator());
-
-        var3.setDomainGridlinesVisible(true);
-
-
-        XYDataset var4 = createUnitDatasetForLine(unitApproachingIndexForDt);
-        NumberAxis var5 = new NumberAxis("Value");
-
-        var5.setStandardTickUnits(NumberAxis.createIntegerTickUnits());
-        XYItemRenderer renderer2 = new XYLineAndShapeRenderer(true, false);
-        //var6.setBaseToolTipGenerator(new StandardCategoryToolTipGenerator());
-        XYPlot plot2 = new XYPlot(var4, null, var5, renderer2);
-        plot2.setDomainGridlinesVisible(true);
-
-        NumberAxis var8 = new NumberAxis("Value");
-        var8.setRange(0,time+100) ;
-
-        CombinedRangeCategoryPlot var9 = new CombinedRangeCategoryPlot(var8);
-        var9.setRangePannable(true);
-        var9.add(plot1, 3);
-        var9.add(plot2, 2);
-        var9.setOrientation(PlotOrientation.HORIZONTAL);
-
-        JFreeChart var10 = new JFreeChart("Combined Domain Category Plot Demo", new Font("SansSerif", 1, 12), var9, true);
-        //ChartUtilities.applyCurrentTheme(var10);
-        var3.setAxisOffset(RectangleInsets.ZERO_INSETS);
-        var7.setAxisOffset(RectangleInsets.ZERO_INSETS);
-        return var10;
-    }*/
-
 
 //------------------Create dataset------------------------//
     /**
@@ -282,13 +233,22 @@ public class DataPlotting {
     public void plotUnitEnergy(List<Double> unitEnergyList,int time) throws IOException {
         this.unitEnergyList = unitEnergyList;
         JFreeChart chart = createLineChart(createUnitDatasetForLine(this.unitEnergyList),time,
-                "Line chart for energy consumption per unit time","time","energy consumption");
+                "Line chart for energy consumption per unit time","Time","Energy consumption");
 
         SVGGraphics2D g2 = new SVGGraphics2D(500, 300);
         Rectangle r = new Rectangle(0, 0, 500, 300);
         chart.draw(g2, r);
         File f = new File("output/Energy.svg");
         SVGUtils.writeToSVG(f, g2.getSVGElement());
+
+        //The following program is for my thesis which is used to produce pdf images for latex
+        PDFDocument pdfDoc = new PDFDocument();
+        pdfDoc.setTitle("Energy-chart");
+        pdfDoc.setAuthor("zhjj370@nuaa.edu.cn");
+        Page page = pdfDoc.createPage(new Rectangle(500, 300));
+        PDFGraphics2D g2pdf = page.getGraphics2D();
+        chart.draw(g2pdf, new Rectangle(0, 0, 500, 300));
+        pdfDoc.writeToFile(new File("output/pdf/Energy.pdf"));
 
     }
 
@@ -306,8 +266,17 @@ public class DataPlotting {
         SVGGraphics2D g2 = new SVGGraphics2D(500, 300);
         Rectangle r = new Rectangle(0, 0, 500, 300);
         chart.draw(g2, r);
-        File f = new File("output/ApproachingIndexForDt.svg");
+        File f = new File("output/NDI.svg");
         SVGUtils.writeToSVG(f, g2.getSVGElement());
+
+        //The following program is for my thesis which is used to produce pdf images for latex
+        PDFDocument pdfDoc = new PDFDocument();
+        pdfDoc.setTitle("NDI-chart");
+        pdfDoc.setAuthor("zhjj370@nuaa.edu.cn");
+        Page page = pdfDoc.createPage(new Rectangle(500, 300));
+        PDFGraphics2D g2pdf = page.getGraphics2D();
+        chart.draw(g2pdf, new Rectangle(0, 0, 500, 300));
+        pdfDoc.writeToFile(new File("output/pdf/NDI.pdf"));
     }
 
     public void plotApproachingIndexForDtXX(List<Double> unitApproachingIndexForDt,int time) throws IOException {

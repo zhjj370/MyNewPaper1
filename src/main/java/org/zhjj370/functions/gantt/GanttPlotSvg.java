@@ -1,5 +1,8 @@
 package org.zhjj370.functions.gantt;
 
+import com.orsonpdf.PDFDocument;
+import com.orsonpdf.PDFGraphics2D;
+import com.orsonpdf.Page;
 import org.zhjj370.functions.element.DataForGantt;
 import org.jfree.chart.ChartTheme;
 import org.jfree.chart.JFreeChart;
@@ -62,6 +65,15 @@ public class GanttPlotSvg {
         chart.draw(g2, r);
         File f = new File("output/Gantt.svg");
         SVGUtils.writeToSVG(f, g2.getSVGElement());
+
+        //The following program is for my thesis which is used to produce pdf images for latex
+        PDFDocument pdfDoc = new PDFDocument();
+        pdfDoc.setTitle("Gantt");
+        pdfDoc.setAuthor("zhjj370@nuaa.edu.cn");
+        Page page = pdfDoc.createPage(new Rectangle(1200, 700));
+        PDFGraphics2D g2pdf = page.getGraphics2D();
+        chart.draw(g2pdf, new Rectangle(0, 0, 1200, 700));
+        pdfDoc.writeToFile(new File("output/pdf/Gantt.pdf"));
     }
 
 

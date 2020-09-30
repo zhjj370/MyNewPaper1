@@ -67,13 +67,12 @@ public class Const {
     //随机数random的种子
     public static final int seed = 0;
     //工艺对应时间改变几率 Probability of process time change
-    public static final int _ptime = 80;
+    public static final int _ptime = 50;
     //增长幅度 Growth rate
-    public static final int _growth = 10;
+    public static final int _growth = 5;
 
-    /**
-     * 一些程序中的选择
-     */
+    //是否开启AMRM Whether to enable AMRM
+    public static final boolean whetherToUseAMRM = false;
 
 
     /**
